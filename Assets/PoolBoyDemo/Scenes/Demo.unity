@@ -241,6 +241,8 @@ MonoBehaviour:
   prefabPools:
   - prefab: {fileID: 103102, guid: f91a1def5f79f63428f9939c9ea8b229, type: 2}
     preloadQuantity: 5
+  - prefab: {fileID: 175008, guid: bc013dfb66413114ea95f1118ee4677b, type: 2}
+    preloadQuantity: 10
 --- !u!4 &1053576116
 Transform:
   m_ObjectHideFlags: 0

@@ -9,7 +9,6 @@ public class PoolBoy : MonoBehaviour
     private List<PrefabPool> prefabPools;
 
     private Dictionary<GameObject, PrefabPool> gameObjectToPrefabPool = new Dictionary<GameObject, PrefabPool>();
-    private Dictionary<string, GameObject> nameToPrefab = new Dictionary<string, GameObject>();
 
     private void Awake()
     {
@@ -30,7 +29,6 @@ public class PoolBoy : MonoBehaviour
         {
             prefabPool.Initialize(Instance);
             gameObjectToPrefabPool.Add(prefabPool.Prefab, prefabPool);
-            nameToPrefab.Add(prefabPool.Prefab.name, prefabPool.Prefab);
         }
     }
 
@@ -55,11 +53,15 @@ public class PoolBoy : MonoBehaviour
 
     public void Despawn(GameObject go)
     {
-        string gameObjectName = go.name;
+        PoolObject poolObject = go.GetComponent<PoolObject>();
 
-        if (nameToPrefab.ContainsKey(go.name))
+        if (poolObject == null)
         {
-            gameObjectToPrefabPool[nameToPrefab[gameObjectName]].Despawn(go);
+            Destroy(go);
+        }
+        else
+        {
+            poolObject.Pool.Despawn(go);
         }
     }
 }

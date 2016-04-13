@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
@@ -46,9 +45,11 @@ public class PrefabPool
     public void Despawn(GameObject gameObject)
     {
         gameObject.SetActive(false);
-        spawnedCount--;
-        gameObjectPool.Push(gameObject);
         gameObject.transform.SetParent(poolBoy.transform);
+
+        gameObjectPool.Push(gameObject);
+
+        spawnedCount--;
     }
 
     private void InstantiateGameObjects(int count)
@@ -60,6 +61,7 @@ public class PrefabPool
             gameObject.name = prefab.name;
             gameObject.transform.SetParent(poolBoy.transform);
             gameObject.SetActive(false);
+            gameObject.AddComponent<PoolObject>().Pool = this;
 
             gameObjectPool.Push(gameObject);
         }
