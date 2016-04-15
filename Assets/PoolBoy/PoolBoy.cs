@@ -64,4 +64,12 @@ public class PoolBoy : MonoBehaviour
             poolObject.Pool.Despawn(go);
         }
     }
+
+    private void OnValidate()
+    {
+        foreach (PrefabPool prefabPool in prefabPools)
+        {
+            prefabPool.RefreshName();
+        }
+    }
 }

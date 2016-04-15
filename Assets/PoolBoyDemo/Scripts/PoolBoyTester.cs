@@ -1,25 +1,16 @@
 using UnityEngine;
-using System.Collections;
 
 public class PoolBoyTester : MonoBehaviour
 {
-    public GameObject prefab;
+    public GameObject projectile;
 
-    private void Update()
+    private void Start()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            PoolBoy.Instance.Spawn(prefab);
-        }
+        InvokeRepeating("Fire", 0, 0.1f);
+    }
 
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            SpriteRenderer spriteRenderer = FindObjectOfType<SpriteRenderer>();
-
-            if (spriteRenderer)
-            {
-                PoolBoy.Instance.Despawn(spriteRenderer.gameObject);
-            }
-        }
+    private void Fire()
+    {
+        PoolBoy.Instance.Spawn(projectile, transform.position);
     }
 }
